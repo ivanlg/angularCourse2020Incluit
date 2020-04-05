@@ -1,5 +1,11 @@
-<div class="container mt-4">
-    <div class="card-columns">
-        <app-contact-card *ngFor="let contact of contacts" [contact]="contact"></app-contact-card>
+<div class="jumbotron mt-4">
+    <h1 class="display-5">Contact List</h1>
+    <div class="container">
+        <div class="card-columns mt-2">
+            <app-contact-card *ngFor="let contact of contacts" [contact]="contact"></app-contact-card>
+        </div>
+        <div *ngIf="contacts.length === 0" class="alert alert-info mt-4">
+            There are no contacts.
+        </div>
     </div>
 </div>
