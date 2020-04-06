@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IContact } from '../../models/contact.interface';
+import { Contact } from '../../models/contact.model';
 
 @Component({
   selector: 'app-contact-card',
@@ -8,7 +8,7 @@ import { IContact } from '../../models/contact.interface';
 })
 export class ContactCardComponent implements OnInit {
 
-  @Input() contact: IContact;
+  @Input() contact: Contact;
 
   constructor() { }
 

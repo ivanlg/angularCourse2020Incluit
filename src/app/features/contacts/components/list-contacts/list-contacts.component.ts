@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { IContact } from '../../models/contact.interface';
+import { Contact } from '../../models/contact.model';
 import { IContactsState } from '../../store/contacts.reducer';
 import * as fromSelectorContacts from '../../store/contacts.selectors';
 import { Store, select } from '@ngrx/store';
@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class ListContactsComponent implements OnInit, OnDestroy {
 
-  @Input() contacts: IContact[];
+  @Input() contacts: Contact[];
 
   loadContactsSubs: Subscription;
 

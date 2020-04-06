@@ -7,6 +7,9 @@
                 <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': f.name.errors && f.name.touched }" />
                 <div *ngIf="f.name.errors && f.name.touched" class="invalid-feedback">
                     <div *ngIf="f.name.errors.required">First Name is required</div>
+                    <div *ngIf="f.name.errors.maxlength || f.name.errors.minlength">
+                        Name must be between 3 and 20 characters long
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -14,6 +17,9 @@
                 <input type="text" formControlName="surname" class="form-control" [ngClass]="{ 'is-invalid': f.surname.errors && f.surname.touched }" />
                 <div *ngIf="f.surname.errors && f.surname.touched" class="invalid-feedback">
                     <div *ngIf="f.surname.errors.required">Last Name is required</div>
+                    <div *ngIf="f.surname.errors.maxlength || f.surname.errors.minlength">
+                        Surname must be between 3 and 20 characters long
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -21,6 +27,7 @@
                 <input type="text" formControlName="phone" class="form-control" [ngClass]="{ 'is-invalid': f.phone.errors && f.phone.touched }" />
                 <div *ngIf="f.phone.errors && f.phone.touched" class="invalid-feedback">
                     <div *ngIf="f.phone.errors.required">Phone Number is required</div>
+                    <div *ngIf="f.phone.errors.pattern">Incorrect format ex: 123-456-7890</div>
                 </div>
             </div>
             <div class="form-group">
@@ -28,6 +35,7 @@
                 <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': f.email.errors && f.email.touched }" />
                 <div *ngIf="f.email.errors && f.email.touched" class="invalid-feedback">
                     <div *ngIf="f.email.errors.required">Email is required</div>
+                    <div *ngIf="f.email.errors.pattern">Incorrect format</div>
                 </div>
             </div>
             <div class="form-group">
@@ -59,6 +67,17 @@
                 </select>
                 <div *ngIf="f.districtName.errors && f.districtName.touched" class="text-danger">
                     <div *ngIf="f.districtName.errors.required"><small>District is required</small></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>ZipCode</label>
+                <input type="text" formControlName="zipCode" class="form-control" [ngClass]="{ 'is-invalid': f.zipCode.errors && f.zipCode.touched }" />
+                <div *ngIf="f.zipCode.errors && f.zipCode.touched" class="invalid-feedback">
+                    <div *ngIf="f.zipCode.errors.required">ZipCode is required</div>
+                    <div *ngIf="f.zipCode.errors.maxlength || f.zipCode.errors.minlength">
+                        ZipCode must be between 3 and 5 characters long
+                    </div>
+                    <div *ngIf="f.zipCode.errors.pattern">Only numeric values</div>
                 </div>
             </div>
             <div class="form-group mt-4">

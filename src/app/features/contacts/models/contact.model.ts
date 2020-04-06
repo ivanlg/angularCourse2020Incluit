@@ -1,4 +1,4 @@
-export interface IContact {
+export class Contact {
     id:           number;
     name:         string;
     surname:    string;
@@ -7,5 +7,9 @@ export interface IContact {
     adressName:   string;
     stateName:    string;
     districtName: string;
-    //zipCode:      number;
+    zipCode:      number;
+
+    public constructor(init?: Partial<Contact>) {
+        Object.assign(this, init);
+    }
 }

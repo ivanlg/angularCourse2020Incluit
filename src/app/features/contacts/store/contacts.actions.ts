@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { IState } from '../models/state.interface';
+import { Contact } from '../models/contact.model';
 
 export enum ContactsActionsTypes {
   FETCH_STATES = '[CONTACTS:  FETCH_ADD_STATE]',
@@ -41,7 +42,7 @@ export class ClearData implements Action {
 
 export class SaveContact implements Action {
   readonly type = ContactsActionsTypes.SAVE_CONTACT;
-  constructor(public payload: any) { }
+  constructor(public payload: Contact) { }
 }
 
 export type ContactsActions =

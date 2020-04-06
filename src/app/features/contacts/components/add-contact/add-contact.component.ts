@@ -8,6 +8,7 @@ import * as fromActionsContacts from '../../store/contacts.actions';
 import * as fromSelectorContacts from '../../store/contacts.selectors';
 import { filter } from 'rxjs/operators';
 import { IState } from '../../models/state.interface';
+import { Contact } from '../../models/contact.model';
 
 @Component({
   selector: 'app-add-contact',
@@ -43,13 +44,19 @@ export class AddContactComponent implements OnInit, OnDestroy {
 
   buildForm() {
     this.contactForm = this.fb.group({
-        name: ['', Validators.required],
-        surname: ['', Validators.required],
-        phone: ['', Validators.required],
-        email: ['', Validators.required],
-        adressName: ['', Validators.required],
+        name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+        surname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+        phone: ['', [Validators.required, Validators.pattern('^\\d{3}-\\d{3}-\\d{4}$')]],
+        email: ['', [Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
+        adressName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
         stateName: ['', Validators.required],
-        districtName: ['', Validators.required]
+        districtName: ['', Validators.required],
+        zipCode : ['', [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(5),
+          Validators.pattern("^[0-9]*$")
+        ]]
     });
   }
 
@@ -100,10 +107,10 @@ export class AddContactComponent implements OnInit, OnDestroy {
         return;
     }
 
-    alert('SUCCESS!! :-)');
-    console.log(this.contactForm.value);
+    const newContact: Contact = new Contact(this.contactForm.value);
+
     this.store.dispatch(
-      new fromActionsContacts.SaveContact(this.contactForm.value),
+      new fromActionsContacts.SaveContact(newContact)
     );
   }
 
