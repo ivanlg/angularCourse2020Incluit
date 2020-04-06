@@ -36,10 +36,10 @@ export class AddContactComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.buildForm();
+    this.onChanges();
     this.loadStates();
     this.setStates();
     this.setDistrict();
-    this.logContacts();
   }
 
   buildForm() {
@@ -49,7 +49,7 @@ export class AddContactComponent implements OnInit, OnDestroy {
         phone: ['', [Validators.required, Validators.pattern('^\\d{3}-\\d{3}-\\d{4}$')]],
         email: ['', [Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
         adressName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-        stateName: ['', Validators.required],
+        state: ['', Validators.required],
         districtName: ['', Validators.required],
         zipCode : ['', [
           Validators.required,
@@ -74,8 +74,8 @@ export class AddContactComponent implements OnInit, OnDestroy {
         });
   }
 
-  loadDistricts(event) {
-    this.state = event;
+  loadDistricts(state) {
+    this.state = state.id;
     this.store.dispatch(
         new fromActionsContacts.FetchDistricts(this.state),
     );
@@ -90,15 +90,6 @@ export class AddContactComponent implements OnInit, OnDestroy {
       });
   }
 
-  logContacts(){
-    this.loadDistrctSubs = this.store
-      .pipe(select(fromSelectorContacts.selectDataContacts))
-      .pipe(filter(val => !!val))
-      .subscribe((data: any) => {
-          console.log('contacts',data);
-      });
-  }
-
   onSubmit() {
     this.submitted = true;
 
@@ -108,13 +99,19 @@ export class AddContactComponent implements OnInit, OnDestroy {
     }
 
     const newContact: Contact = new Contact(this.contactForm.value);
-
+    newContact.stateName = this.contactForm.value.state.nombre;
     this.store.dispatch(
       new fromActionsContacts.SaveContact(newContact)
     );
   }
 
   ngOnDestroy(): void {
+  }
+
+  onChanges(): void {
+    this.contactForm.get('state').valueChanges.subscribe(val => {
+      this.loadDistricts(val);
+    });
   }
 
   // convenience getter for easy access to form fields

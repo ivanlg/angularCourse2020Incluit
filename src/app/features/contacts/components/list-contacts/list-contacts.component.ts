@@ -24,7 +24,6 @@ export class ListContactsComponent implements OnInit, OnDestroy {
       .pipe(select(fromSelectorContacts.selectDataContacts))
       .pipe(filter(val => !!val))
       .subscribe((data: any) => {
-          debugger;
           this.contacts = data;
       });
   }

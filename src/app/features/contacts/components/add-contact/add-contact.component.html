@@ -46,24 +46,27 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="stateName">State</label>
+                <label for="state">State</label>
                 <select class="form-control"
-                    id="stateName"
-                    formControlName="stateName"
-                    [ngClass]="{ 'is-invalid': f.stateName.errors && f.stateName.touched }"
-                    (change)="loadDistricts($event.target.value)">
+                    id="state"
+                    formControlName="state"
+                    [ngClass]="{ 'is-invalid': f.state.errors && f.state.touched }">
                     <option value="" disabled selected hidden>Select Your State</option>
-                    <option *ngFor="let item of states" [value]="item.id">{{item.nombre}}</option>
+                    <option *ngFor="let item of states" [ngValue]="item">{{item.nombre}}</option>
                 </select>
-                <div *ngIf="f.stateName.errors && f.stateName.touched" class="text-danger">
-                    <div *ngIf="f.stateName.errors.required"><small>State is required</small></div>
+                <div *ngIf="f.state.errors && f.state.touched" class="text-danger">
+                    <div *ngIf="f.state.errors.required"><small>State is required</small></div>
                 </div>
             </div>
             <div class="form-group">
-                <label for="districtName">State</label>
-                <select class="form-control" id="districtName" formControlName="districtName" [ngClass]="{ 'is-invalid': f.districtName.errors && f.districtName.touched }">
+                <label for="districtName">District</label>
+                <select
+                    class="form-control"
+                    id="districtName"
+                    formControlName="districtName"
+                    [ngClass]="{ 'is-invalid': f.districtName.errors && f.districtName.touched }">
                     <option value="" disabled selected hidden>Select Your District</option>
-                    <option *ngFor="let item of districs" [value]="item.id">{{item.nombre}}</option>
+                    <option *ngFor="let item of districs" [value]="item.nombre">{{item.nombre}}</option>
                 </select>
                 <div *ngIf="f.districtName.errors && f.districtName.touched" class="text-danger">
                     <div *ngIf="f.districtName.errors.required"><small>District is required</small></div>
